@@ -38,7 +38,7 @@ def main():
     except ValueError as e:
         print (str(e))
         return
-
+    print (dept_dict)
     dept_prod_pair = zip(dept_dict.keys(), dept_dict.values())
     dept_prod_pair = list(dept_prod_pair)
     dept_prod_pair = sorted(dept_prod_pair, key=lambda row: (row[0]))
