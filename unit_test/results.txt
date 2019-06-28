@@ -1,0 +1,14 @@
+[Fri, Jun 28, 2019  3:42:54 PM]
+test_DeptRecord (unit_test.test_DeptRecord.TestDeptRecord) ... ok
+test_FuncCall (unit_test.test_DeptRecord.TestDeptRecord) ... ok
+test_IsPosIntegerOrd (unit_test.test_IsPosIntegerOrd.TestIsPosIntegerOrd) ... ok
+test_IsPosIntegerProd (unit_test.test_IsPosIntegerProd.TestIsPosIntegerProd) ... ok
+test_IsValidOrd (unit_test.test_IsValidOrd.TestIsValidOrd) ... ok
+test_IsValidProd (unit_test.test_IsValidProd.TestIsValidProd) ... ok
+test_FuncCall (unit_test.test_ProdRecord.TestProdRecord) ... ok
+test_ProdRecord (unit_test.test_ProdRecord.TestProdRecord) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.002s
+
+OK

@@ -1,5 +1,6 @@
 import unittest
 import sys
+sys.path.insert(0, 'C:/Users/bhaut/Documents/GitHub/Purchase-Analytics')
 from src.AnalyticsHelper import DeptRecord
 
 import math
@@ -18,6 +19,10 @@ class TestDeptRecord(unittest.TestCase):
         self.OrdInvalid2 = ['2','9327','3','-10']
         self.OrdInvalid3 = ['2','9327.098','3','0']
         self.OrdInvalid4 = ['2','9327','3','0.908']
+        self.OrdInvalid5 = ['2','1234','3','0']  # Product ID not in Prod_dict
+        self.OrdInvalid6 = ['2','9327','3'] #record lenght less than 4
+        self.OrdInvalid7 = ['2','9327','3', '0', 'fadfadf'] #record lenght more than 4
+        self.OrdInvalid8 = ['2','9327','3','2'] #reorded flag is not 0 or 1
     
     def test_FuncCall(self):
         self.assertTrue(DeptRecord(self.OrdValid, self.prod_dict, self.dept_dict))
@@ -25,6 +30,10 @@ class TestDeptRecord(unittest.TestCase):
         self.assertRaises(ValueError, DeptRecord, self.OrdInvalid2, self.prod_dict, self.dept_dict)
         self.assertRaises(ValueError, DeptRecord, self.OrdInvalid3, self.prod_dict, self.dept_dict)
         self.assertRaises(ValueError, DeptRecord, self.OrdInvalid4, self.prod_dict, self.dept_dict)
+        self.assertRaises(ValueError, DeptRecord, self.OrdInvalid5, self.prod_dict, self.dept_dict)
+        self.assertRaises(ValueError, DeptRecord, self.OrdInvalid6, self.prod_dict, self.dept_dict)
+        self.assertRaises(ValueError, DeptRecord, self.OrdInvalid7, self.prod_dict, self.dept_dict)
+        self.assertRaises(ValueError, DeptRecord, self.OrdInvalid8, self.prod_dict, self.dept_dict)
 
     
     def test_DeptRecord(self):

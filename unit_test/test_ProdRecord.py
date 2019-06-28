@@ -1,6 +1,6 @@
 import unittest
 import sys
-
+sys.path.insert(0, 'C:/Users/bhaut/Documents/GitHub/Purchase-Analytics')
 from src.AnalyticsHelper import ProdRecord
 import math
 
@@ -16,6 +16,8 @@ class TestProdRecord(unittest.TestCase):
         self.ProdInvalid4 = ['9327','Garlic Powder','104','adfadf']
         self.ProdInvalid5 = ['9327','Garlic Powder','104','13.03']
         self.ProdInvalid6 = ['9327.09','Garlic Powder','104','13']
+        self.ProdInvalid7 = ['9327','Garlic Powder','104'] #Product information length less than 4
+        self.ProdInvalid8 = ['9327','Garlic Powder','104','13', 'jasdfdf'] #length more than 4
     
     def test_FuncCall(self):
         self.assertTrue(ProdRecord(self.ProdValid, self.prod_dict))
@@ -25,6 +27,8 @@ class TestProdRecord(unittest.TestCase):
         self.assertRaises(ValueError, ProdRecord, self.ProdInvalid4, self.prod_dict)
         self.assertRaises(ValueError, ProdRecord, self.ProdInvalid5, self.prod_dict)
         self.assertRaises(ValueError, ProdRecord, self.ProdInvalid6, self.prod_dict)
+        self.assertRaises(ValueError, ProdRecord, self.ProdInvalid7, self.prod_dict)
+        self.assertRaises(ValueError, ProdRecord, self.ProdInvalid8, self.prod_dict)
     
     def test_ProdRecord(self):
         ProdRecord(self.ProdValid, self.prod_dict)
