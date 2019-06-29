@@ -44,10 +44,11 @@ FUNCTIONS
         :param prod_dict: dictionary of ['Product_ID': department_ID]
         :return: True or False depending on the conditions
         """
-    IsValidProd(record):
+    IsValidProd(record, prod_dict):
         """
         Checks if the products record is correct length and the values are positive integers
         :param record: [product_id,product_name,aisle_id,department_id]
+        :param prod_dict: dictionary of ['Product_ID': department_ID]
         :return: True or False depending on the conditions
         """
     IsPosIntegerOrd(record):

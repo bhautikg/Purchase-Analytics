@@ -52,8 +52,9 @@ For the Product Record dictionary, in this order:
 
 1. Length of the record must be 4
 2. The relevant enteries (`Product_Id` and `Department_ID`, ) are all positive integers
+3. `Product_Id` key is not already in `prod_dict` (i.e a duplicate entry)
 
-Then the record is added to the `prod_dict`.
+If these are not met, then the record is not added, otherwise the record is added to the `prod_dict`.
 
 For the Department Record dictionary, the Product Orders were validated in the following order, and order is important for this:
 
@@ -62,16 +63,24 @@ For the Department Record dictionary, the Product Orders were validated in the f
 3. The `reordered` flag is either 0 or 1
 4. The `Product_Id` key must be in the `prod_dict`
 
+If these conditions are not met, a statement is printed in the terminal showing which record is invalid, and the record is not added in the `dept_dict` (this was done so that a valid report would still be generated with all the valid records)
+
 If those conditions are satisfied then record is added to `dept_dict` as following
 
 1. If the department_ID key is not already in the `dept_dict`, then create a `function_dict` for that department ID:
     i. Set the `function_dict['number_of_orders']= 1`
+    
     ii. Check the reordered flag, and if its '0' set `function_dict['number_of_first_orders']= 1` else set it as 0
+    
     iii. Calculate the ratio and set `function_dict['percentage']` as that and round it to two decimal places.
 2. If the department_ID key is already in the `dept_dict` then:
+
     i. Get the `function_dict` for that deptartment_ID from `dept_dict`
+    
     ii. Add 1 to the `function_dict['number_of_orders']` field. 
+    
     iii. Check the reordered flag in the record, and if its '0' add 1 to `function_dict['number_of_first_orders']` field
+    
     IV. Calculate the ratio and set `function_dict['percentage']` as that and round it to two decimal places
 
 After reading and entering all the records, the `dept_dict` dictionary is converted into a list to be sorted in ascending order of department_ID (for this, the department_ID must be integers). Finally, the sorted list is output as a CSV file in the following format {department_id,number_of_orders,number_of_first_orders,percentage}
@@ -162,8 +171,8 @@ The testsuite tests are run using run_tests.sh file to run the following tests:
 * test_1: runs the provided sample test with all valid entries to see if a valid output is seen
 * test_2: tests the result when one of the department_id entry in products.csv is invalid.
 * test_3: tests the result when one of the reordered flag entry in products_order.csv is invalid.
-* test_4: 
-* test_5:
+* test_4: tests the result when an extra value is added to one of the orders. 
+* test_5: tests the result when a product_ID has two records in products.csv file, it only takes the first one.
 
 
 ## Repo directory structure
@@ -174,7 +183,9 @@ The directory structure for your repo should look like this:
     ├── run.sh
     ├── unittest_run.sh
     ├── src
-    │   └── purchase_analytics.py
+    │   └── PurchaseAnalyticsMain.py
+    │   └── AnalyticsHelper.py
+    │   └── __init__.py   
     ├── input
     │   └── products.csv
     |   └── order_products.csv
@@ -189,9 +200,9 @@ The directory structure for your repo should look like this:
     |       |   │   └── order_products.csv
     |       |   |__ output
     |       |   │   └── report.csv
-            . . . 
-            . . .
-            . . .
+    |       . . . 
+    |       . . .
+    |       . . .
     |       ├── test_4
     |           ├── input
     |           │   └── products.csv

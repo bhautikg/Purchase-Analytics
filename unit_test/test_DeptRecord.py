@@ -26,14 +26,23 @@ class TestDeptRecord(unittest.TestCase):
     
     def test_FuncCall(self):
         self.assertTrue(DeptRecord(self.OrdValid, self.prod_dict, self.dept_dict))
-        self.assertRaises(ValueError, DeptRecord, self.OrdInvalid1, self.prod_dict, self.dept_dict)
-        self.assertRaises(ValueError, DeptRecord, self.OrdInvalid2, self.prod_dict, self.dept_dict)
-        self.assertRaises(ValueError, DeptRecord, self.OrdInvalid3, self.prod_dict, self.dept_dict)
-        self.assertRaises(ValueError, DeptRecord, self.OrdInvalid4, self.prod_dict, self.dept_dict)
-        self.assertRaises(ValueError, DeptRecord, self.OrdInvalid5, self.prod_dict, self.dept_dict)
-        self.assertRaises(ValueError, DeptRecord, self.OrdInvalid6, self.prod_dict, self.dept_dict)
-        self.assertRaises(ValueError, DeptRecord, self.OrdInvalid7, self.prod_dict, self.dept_dict)
-        self.assertRaises(ValueError, DeptRecord, self.OrdInvalid8, self.prod_dict, self.dept_dict)
+        self.assertFalse(DeptRecord(self.OrdInvalid1, self.prod_dict, self.dept_dict))
+        self.assertFalse(DeptRecord(self.OrdInvalid2, self.prod_dict, self.dept_dict))
+        self.assertFalse(DeptRecord(self.OrdInvalid3, self.prod_dict, self.dept_dict))
+        self.assertFalse(DeptRecord(self.OrdInvalid4, self.prod_dict, self.dept_dict))
+        self.assertFalse(DeptRecord(self.OrdInvalid5, self.prod_dict, self.dept_dict))
+        self.assertFalse(DeptRecord(self.OrdInvalid6, self.prod_dict, self.dept_dict))
+        self.assertFalse(DeptRecord(self.OrdInvalid7, self.prod_dict, self.dept_dict))
+        self.assertFalse(DeptRecord(self.OrdInvalid8, self.prod_dict, self.dept_dict))
+
+        # self.assertRaises(ValueError, DeptRecord, self.OrdInvalid1, self.prod_dict, self.dept_dict)
+        # self.assertRaises(ValueError, DeptRecord, self.OrdInvalid2, self.prod_dict, self.dept_dict)
+        # self.assertRaises(ValueError, DeptRecord, self.OrdInvalid3, self.prod_dict, self.dept_dict)
+        # self.assertRaises(ValueError, DeptRecord, self.OrdInvalid4, self.prod_dict, self.dept_dict)
+        # self.assertRaises(ValueError, DeptRecord, self.OrdInvalid5, self.prod_dict, self.dept_dict)
+        # self.assertRaises(ValueError, DeptRecord, self.OrdInvalid6, self.prod_dict, self.dept_dict)
+        # self.assertRaises(ValueError, DeptRecord, self.OrdInvalid7, self.prod_dict, self.dept_dict)
+        # self.assertRaises(ValueError, DeptRecord, self.OrdInvalid8, self.prod_dict, self.dept_dict)
 
     
     def test_DeptRecord(self):
@@ -50,11 +59,11 @@ class TestDeptRecord(unittest.TestCase):
                     3: {'number_of_orders': 1, 'number_of_first_orders': 0, 'percentage': 0} }
         self.assertEqual(self.dept_dict, test_dict)  #Dept dictionary shouldnt change
 
-        self.assertRaises(ValueError, DeptRecord, self.OrdInvalid1, self.prod_dict, self.dept_dict) #try to add an invalid entry
+        DeptRecord(self.OrdInvalid1, self.prod_dict, self.dept_dict) #try to add an invalid entry
         self.assertEqual(self.dept_dict, test_dict) #see if it hasnt added anything
 
         self.dept_dict = {} #clear this dictionary
-        self.assertRaises(ValueError, DeptRecord, self.OrdInvalid1, self.prod_dict, self.dept_dict) #see if it doesnt add anything to the dictionary
+        DeptRecord(self.OrdInvalid2, self.prod_dict, self.dept_dict) #see if it doesnt add anything to the dictionary
         self.assertEqual(self.dept_dict, {})
 
 if __name__=="__main__":
