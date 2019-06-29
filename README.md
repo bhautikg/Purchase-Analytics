@@ -29,8 +29,8 @@ To do this I first created a dictionary using "Product_ID" as key, and "Departme
 ```
 prod_dict = {
              'Product1': department_ID,
-	         'product2': department_ID}
-	        }
+	     'product2': department_ID
+	    }
 ```
 
 Next, I create a `dept_dict`, and for each order being read from the "order_products" database, I find the associated department ID for the product being orderd, which will be the key for dept_dict. Each department in `dept_dict` had a value of `function_dict`, created and updated as the orders are read.
@@ -41,8 +41,8 @@ The final data structure looks like this
 ```
 dept_dict = {
              department_ID1: {'number_of_orders': x, 'number_of_first_orders': y, 'percentage': z} ,
-	         department_ID2: {'number_of_orders': x, 'number_of_first_orders': y, 'percentage': z} }
-	        }
+	     department_ID2: {'number_of_orders': x, 'number_of_first_orders': y, 'percentage': z}
+	    }
 ```
 `function_dict` for department_ID1 is {'number_of_orders': x, 'number_of_first_orders': y, 'percentage': z}
 
@@ -68,6 +68,7 @@ If these conditions are not met, a statement is printed in the terminal showing 
 If those conditions are satisfied then record is added to `dept_dict` as following
 
 1. If the department_ID key is not already in the `dept_dict`, then create a `function_dict` for that department ID:
+    
     i. Set the `function_dict['number_of_orders']= 1`
     
     ii. Check the reordered flag, and if its '0' set `function_dict['number_of_first_orders']= 1` else set it as 0
@@ -203,7 +204,7 @@ The directory structure for your repo should look like this:
     |       . . . 
     |       . . .
     |       . . .
-    |       ├── test_4
+    |       ├── test_5
     |           ├── input
     |           │   └── products.csv
     |           |   └── order_products.csv
