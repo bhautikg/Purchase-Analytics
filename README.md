@@ -68,6 +68,7 @@ If these conditions are not met, a statement is printed in the terminal showing 
 If those conditions are satisfied then record is added to `dept_dict` as following
 
 1. If the department_ID key is not already in the `dept_dict`, then create a `function_dict` for that department ID:
+    
     i. Set the `function_dict['number_of_orders']= 1`
     
     ii. Check the reordered flag, and if its '0' set `function_dict['number_of_first_orders']= 1` else set it as 0
