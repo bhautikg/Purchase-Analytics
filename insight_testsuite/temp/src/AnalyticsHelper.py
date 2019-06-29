@@ -30,13 +30,14 @@ def IsPosIntegerOrd(record):
     except ValueError:
         return False
 
-def IsValidProd(record):
+def IsValidProd(record, prod_dict):
     """
-    Checks if the products record is correct length and the values are positive integers
+    Checks if the products record is correct length and the values are positive integers and not duplicate
     :param record: [product_id,product_name,aisle_id,department_id]
+    :param prod_dict: dictionary of ['Product_ID': department_ID]
     :return: True or False depending on the conditions
     """
-    if (len(record) == 4) and IsPosIntegerProd(record): # Must check in this order! if length is not correct, IsPos will throw error
+    if (len(record) == 4) and IsPosIntegerProd(record) and (record[0] not in prod_dict): # Must check in this order! if length is not correct, IsPos will throw error
         return True
     else:
         return False
@@ -48,14 +49,16 @@ def ProdRecord(record, prod_dict):
     :param prod_dict: dictionary of ['Product_ID': department_ID]
     :return: with the prod_dict updated or entry added
     """
-    if IsValidProd(record): #Must check in this order! Or else IsPosInt will throw error
+    if IsValidProd(record, prod_dict):
         try:
             prod_dict[record[0]] = int(record[3])
         except TypeError:
             return False
         return True
     else:
-        raise ValueError('This record is invalid %s' % record)
+        #raise ValueError('This record is invalid %s' % record)
+        print('This product information is invalid or duplicated %s' % record)
+        return False
 
 def IsValidOrd(record, prod_dict):
     """ 
@@ -104,5 +107,7 @@ def DeptRecord(record, prod_dict, dept_dict):
             ratio = function_dict['number_of_first_orders']/ function_dict['number_of_orders']
             function_dict['percentage'] = round(ratio,2)
     else:
-        raise ValueError('This record is invalid or product information missing %s' % record)
+        #raise ValueError('This record is invalid or product information missing %s' % record)
+        print('This product order is invalid or product information missing %s' % record)
+        return False
     return True

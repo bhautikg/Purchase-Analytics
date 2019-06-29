@@ -1,6 +1,11 @@
 from decimal import Decimal
 
 def IsPosIntegerProd(record):
+    """
+    Checks if product ID and department ID are positive integers
+    :param record: [product_id,product_name,aisle_id,department_id]
+    :return: True or False depending on the conditions
+    """
     try:
 
         if int(record[0])>=0 and int(record[3])>=0:
@@ -11,6 +16,11 @@ def IsPosIntegerProd(record):
         return False
 
 def IsPosIntegerOrd(record):
+    """
+    Checks if Product ID is positive integer, and if reordered flag is 1 or 0 
+    :param record: [order_id,product_id,add_to_cart_order,reordered]
+    :return: True or False depending on the conditions
+    """
     try:
 
         if int(record[1])>=0 and (int(record[3]) == 0 or int(record[3])== 1):
@@ -20,28 +30,43 @@ def IsPosIntegerOrd(record):
     except ValueError:
         return False
 
-def IsValidProd(record):
-    if (len(record) == 4) and IsPosIntegerProd(record): # Must check in this order! if length is not correct, IsPos will throw error
+def IsValidProd(record, prod_dict):
+    """
+    Checks if the products record is correct length and the values are positive integers and not duplicate
+    :param record: [product_id,product_name,aisle_id,department_id]
+    :param prod_dict: dictionary of ['Product_ID': department_ID]
+    :return: True or False depending on the conditions
+    """
+    if (len(record) == 4) and IsPosIntegerProd(record) and (record[0] not in prod_dict): # Must check in this order! if length is not correct, IsPos will throw error
         return True
     else:
         return False
 
 def ProdRecord(record, prod_dict):
     """
+    Adds an entry to prod_dictionary with product ID as key and department ID as value.
     :param record: [product_id,product_name,aisle_id,department_id]
-    :param dict: dictionary of entries
-    :return: dict with record added or updated
+    :param prod_dict: dictionary of ['Product_ID': department_ID]
+    :return: with the prod_dict updated or entry added
     """
-    if IsValidProd(record): #Must check in this order! Or else IsPosInt will throw error
+    if IsValidProd(record, prod_dict):
         try:
             prod_dict[record[0]] = int(record[3])
         except TypeError:
             return False
         return True
     else:
-        raise ValueError('This record is invalid %s' % record)
+        #raise ValueError('This record is invalid %s' % record)
+        print('This product information is invalid or duplicated %s' % record)
+        return False
 
 def IsValidOrd(record, prod_dict):
+    """ 
+    Checks if the order entry is correct length, and then if the order entries are correct type, and if the product ID key exists in the prod_dict
+    :param record: [order_id,product_id,add_to_cart_order,reordered]
+    :param prod_dict: dictionary of ['Product_ID': department_ID]
+    :return: True or False depending on the conditions
+    """
     if (len(record) == 4) and IsPosIntegerOrd(record) and (record[1] in prod_dict): # Must check in this order! if length is not correct, IsPos will throw error
         return True
     else:
@@ -49,9 +74,10 @@ def IsValidOrd(record, prod_dict):
 
 def DeptRecord(record, prod_dict, dept_dict):
     """ 
-    :param Order record: [order_id,product_id,add_to_cart_order,reordered]
-    :param dict: dictionary of entries 
-    :out put [department_id,number_of_orders,number_of_first_orders,percentage]
+    :param record: [order_id,product_id,add_to_cart_order,reordered]
+    :param prod_dict: dictionary of ['Product_ID': department_ID]
+    :param dept_dict: an empty or of format dept_dict = {department_ID1: {'number_of_orders': x, 'number_of_first_orders': y, 'percentage': z}}
+    :out put {department_ID1: {'number_of_orders': x, 'number_of_first_orders': y, 'percentage': z}}
     :return: dict with record added or updated
     """
     if IsValidOrd(record, prod_dict):
@@ -81,5 +107,7 @@ def DeptRecord(record, prod_dict, dept_dict):
             ratio = function_dict['number_of_first_orders']/ function_dict['number_of_orders']
             function_dict['percentage'] = round(ratio,2)
     else:
-        raise ValueError('This record is invalid or product information missing %s' % record)
+        #raise ValueError('This record is invalid or product information missing %s' % record)
+        print('This product order is invalid or product information missing %s' % record)
+        return False
     return True
