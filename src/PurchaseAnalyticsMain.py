@@ -31,9 +31,7 @@ def main():
             next(infile)
             prod_dict = {}
             for i, record in enumerate(infile):
-                flag = AnalyticsHelper.ProdRecord(record, prod_dict)
-                #if flag != True:
-                #    break
+                AnalyticsHelper.ProdRecord(record, prod_dict)
         
 
         with open(args.OrdProdIn, 'r', encoding="utf8") as OrdProdInFile:
@@ -46,8 +44,8 @@ def main():
         print('One or both of the input files not found')
         return
     except ValueError:
-        #print (str(e))
         return
+
     dept_prod_pair = zip(dept_dict.keys(), dept_dict.values())
     dept_prod_pair = list(dept_prod_pair)
     dept_prod_pair = sorted(dept_prod_pair, key=lambda row: (row[0]))
